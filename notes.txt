@@ -1,0 +1,13 @@
+ASP.NET Core
+ - complete re-write of the platform
+ - cross platform and open source
+ - single platform: MVC and WebAPI are combined, WebForms is gone
+ - everything is a dependency
+ - low memory footprint
+ - multiple deployment support - not only IIS: self-hosting, etc.
+ - everything above basic functionality is a nuget package: MVC, logging, Identity etc
+ - uses existing web developing tooling (npm, bower, Grunt and Gulp for build automation, nuget package manager)
+
+ .NET 4.6 => .NET Core
+
+ CoreCLR = subset of .NET Framework(has missing features)
