@@ -1,13 +1,17 @@
 ﻿(function () {
-    var el = document.getElementById("username");
-    el.innerHTML = "Someone";
 
-    var main = document.getElementById("main");
-    main.onmouseenter = function () {
-        main.style = "background-color: #888888;";
-    };
+    var $sidebarAndWrapper = $("#sidebar, #wrapper");
+    var hideSidebarClass = "hide-sidebar";
 
-    main.onmouseleave = function () {
-        main.style = "background-color: none;";
-    }
+    $("#sidebarToggle").click(function () {
+        $sidebarAndWrapper.toggleClass(hideSidebarClass);
+
+        if ($sidebarAndWrapper.hasClass(hideSidebarClass)) {
+            $(this).text("Show Sidebar");
+        }
+        else {
+            $(this).text("Hide Sidebar");
+        }
+    });
+
 })();
