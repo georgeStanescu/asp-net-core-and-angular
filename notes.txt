@@ -22,3 +22,5 @@ JavaScript
   - object oriented: uses prototypical inheritance instead of classes
   - dynamically typed
   - just in time compiled without an intermediate format(MSIL, bytecode)
+
+MVC 6
