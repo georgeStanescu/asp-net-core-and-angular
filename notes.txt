@@ -17,3 +17,8 @@ ASP.NET Core
 
  The Box Model = Content(width and height) + Padding + Border + Margin + (top, right, bottom, left)
     - extra: actual-width, actual-height
+
+JavaScript
+  - object oriented: uses prototypical inheritance instead of classes
+  - dynamically typed
+  - just in time compiled without an intermediate format(MSIL, bytecode)
