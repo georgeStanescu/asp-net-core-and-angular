@@ -11,3 +11,9 @@ ASP.NET Core
  .NET 4.6 => .NET Core
 
  CoreCLR = subset of .NET Framework(has missing features)
+
+ HTML - defines the structure of a web page
+ CSS - defines the design of the page
+
+ The Box Model = Content(width and height) + Padding + Border + Margin + (top, right, bottom, left)
+    - extra: actual-width, actual-height
