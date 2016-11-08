@@ -12,6 +12,10 @@
 
 <form method="post">
     <span validation-summary="ModelOnly"></span>
+    @if (ViewBag.UserMessage != null)
+    {
+        <div>@ViewBag.UserMessage</div>
+    }
 
     <label asp-for="Name">Name</label>
     <input type="text" asp-for="Name" />
@@ -29,3 +33,4 @@
         <input type="submit" value="Send Message" />
     </div>
 </form>
+
