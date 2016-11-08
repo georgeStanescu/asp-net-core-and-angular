@@ -24,3 +24,9 @@ JavaScript
   - just in time compiled without an intermediate format(MSIL, bytecode)
 
 MVC 6
+
+Bootstrap
+ - includes CSS/LESS + JS components
+ - modular and skinnable
+ - built-in support for 80% of common design methaphors
+ 

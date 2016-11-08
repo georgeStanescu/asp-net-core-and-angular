@@ -2,15 +2,18 @@
 
     var $sidebarAndWrapper = $("#sidebar, #wrapper");
     var hideSidebarClass = "hide-sidebar";
+    var $icon = $("#sidebarToggle i.fa");
 
     $("#sidebarToggle").click(function () {
         $sidebarAndWrapper.toggleClass(hideSidebarClass);
 
         if ($sidebarAndWrapper.hasClass(hideSidebarClass)) {
-            $(this).text("Show Sidebar");
+            $icon.removeClass("fa-angle-left");
+            $icon.addClass("fa-angle-right");
         }
         else {
-            $(this).text("Hide Sidebar");
+            $icon.removeClass("fa-angle-right");
+            $icon.addClass("fa-angle-left");
         }
     });
 
