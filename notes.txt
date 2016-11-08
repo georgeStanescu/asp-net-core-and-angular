@@ -29,4 +29,9 @@ Bootstrap
  - includes CSS/LESS + JS components
  - modular and skinnable
  - built-in support for 80% of common design methaphors
- 
+
+Bootstrap Grid System - implicitly, there are 12 vertical blocks(columns) across the page
+  - col-lg-xx >= 1200px
+  - col-md-xx >= 992px
+  - col-sm-xx >= 768px
+  - col-xs-xx <  768px
