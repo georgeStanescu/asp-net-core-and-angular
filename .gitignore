@@ -5,3 +5,5 @@
 /TheWorld/bin/Debug/netcoreapp1.0
 /TheWorld/obj/Debug/netcoreapp1.0
 /TheWorld/project.lock.json
+/.vs/TheWorld/v14/*.suo
+lib
