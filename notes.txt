@@ -35,3 +35,9 @@ Bootstrap Grid System - implicitly, there are 12 vertical blocks(columns) across
   - col-md-xx >= 992px
   - col-sm-xx >= 768px
   - col-xs-xx <  768px
+
+EF Core
+  - complete rewrite of the platform
+  - building Data Access without the requirement on Relational Databases
+  - work in progress
+  - open source(design and implementation)
