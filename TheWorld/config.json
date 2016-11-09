@@ -3,6 +3,10 @@
     "ToAddress": "me@domain.com"
   },
   "ConnectionStrings": {
-    "WorldContextConnection":  "Server=(localdb)\\MSSQLLocalDb;Database=TheWorldDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+    "WorldContextConnection": "Server=(localdb)\\MSSQLLocalDb;Database=TheWorldDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  },
+  "Keys": {
+    "BingKeys": "DONTEVERPUTKEYSINSOURCECONTROL"
   }
+
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheWorld.Models;
+using TheWorld.Services;
 using TheWorld.ViewModels;
 
 namespace TheWorld.Controllers.Api
@@ -16,12 +17,18 @@ namespace TheWorld.Controllers.Api
     {
         private ILogger<TripsController> _logger;
         private IWorldRepository _repository;
+        private GeoCoordsService _service;
 
-        public StopsController(IWorldRepository repository, ILogger<TripsController> logger)
+        public StopsController(
+            IWorldRepository repository, 
+            ILogger<TripsController> logger,
+            GeoCoordsService service)
         {
             _repository = repository;
 
             _logger = logger;
+
+            _service = service;
         }
 
         [HttpGet("")]
@@ -50,11 +57,23 @@ namespace TheWorld.Controllers.Api
                 {
                     var newStop = Mapper.Map<Stop>(vm);
 
-                    _repository.AddStop(tripName, newStop);
+                    var result = await _service.GetCoordsAsync(newStop.Name);
 
-                    if (await _repository.SaveChangesAsync())
-                    return Created($"/api/trips/{tripName}/stops/{newStop.Name}",
-                        Mapper.Map<StopViewModel>(newStop));
+                    if (!result.Success)
+                    {
+                        _logger.LogError(result.Message);
+                    }
+                    else
+                    {
+                        newStop.Latitude = result.Latitude;
+                        newStop.Longitude = result.Longitude;
+
+                        _repository.AddStop(tripName, newStop);
+
+                        if (await _repository.SaveChangesAsync())
+                            return Created($"/api/trips/{tripName}/stops/{newStop.Name}",
+                                Mapper.Map<StopViewModel>(newStop));
+                    }
                 }
             }
             catch (Exception ex)
