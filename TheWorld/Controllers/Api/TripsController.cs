@@ -5,6 +5,7 @@ using TheWorld.ViewModels;
 using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace TheWorld.Controllers.Api
 {
@@ -39,16 +40,21 @@ namespace TheWorld.Controllers.Api
         }
 
         [HttpPost("")]
-        public IActionResult Post([FromBody]TripViewModel newTrip)
+        public async Task<IActionResult> Post([FromBody]TripViewModel newTrip)
         {
             if (ModelState.IsValid)
             {
                 var model = Mapper.Map<Trip>(newTrip);
 
-                return Created($"api/trips/{newTrip.Name}", Mapper.Map<TripViewModel>(model));
+                _repository.AddTrip(model);
+
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Created($"api/trips/{newTrip.Name}", Mapper.Map<TripViewModel>(model));
+                }
             }
 
-            return BadRequest(ModelState);
+            return BadRequest("Failed to save the trip");
         }
     }
 }
