@@ -4,17 +4,21 @@ using TheWorld.Models;
 using TheWorld.ViewModels;
 using System.Collections.Generic;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace TheWorld.Controllers.Api
 {
     [Route("api/trips")]
     public class TripsController : Controller
     {
+        private ILogger<TripsController> _logger;
         private IWorldRepository _repository;
 
-        public TripsController(IWorldRepository repository)
+        public TripsController(IWorldRepository repository, ILogger<TripsController> logger)
         {
             _repository = repository;
+
+            _logger = logger;
         }
 
         [HttpGet("")]
@@ -28,6 +32,8 @@ namespace TheWorld.Controllers.Api
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Failed to get all trips: {ex}");
+
                 return BadRequest("Error occured");
             }
         }
