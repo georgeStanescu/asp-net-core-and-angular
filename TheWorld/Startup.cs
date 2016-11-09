@@ -68,7 +68,11 @@ namespace TheWorld
             WorldContextSeedData seeder,
             ILoggerFactory factory)
         {
-            Mapper.Initialize(config => config.CreateMap<TripViewModel, Trip>().ReverseMap());
+            Mapper.Initialize(config => 
+                {
+                    config.CreateMap<TripViewModel, Trip>().ReverseMap();
+                    config.CreateMap<StopViewModel, Stop>().ReverseMap();
+                });
 
             loggerFactory.AddConsole();
 
