@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -37,13 +38,19 @@ namespace TheWorld.Controllers.Web
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Trips()
+        {
             try
             {
                 var data = _repository.GetAllTrips();
 
                 return View(data);
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 _logger.LogError($"Failed to get trips in Index page: {exp.Message}");
 
