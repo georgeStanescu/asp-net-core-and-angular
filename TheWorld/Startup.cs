@@ -81,7 +81,7 @@ namespace TheWorld
                     {
                         OnRedirectToLogin = async ctx =>
                         {
-                            if (ctx.Request.Path.StartsWithSegments("/api") && 
+                            if (ctx.Request.Path.StartsWithSegments("/api") &&
                                 ctx.Response.StatusCode == (int)HttpStatusCode.OK)
                             {
                                 ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
@@ -92,7 +92,7 @@ namespace TheWorld
                             }
                             await Task.Yield();
                         }
-                    }
+                    };
                 })
                 .AddEntityFrameworkStores<WorldContext>();
         }
