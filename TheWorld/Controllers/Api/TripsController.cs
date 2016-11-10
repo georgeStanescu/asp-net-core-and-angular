@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheWorld.Controllers.Api
 {
     [Route("api/trips")]
+    [Authorize]
     public class TripsController : Controller
     {
         private ILogger<TripsController> _logger;
@@ -27,7 +29,7 @@ namespace TheWorld.Controllers.Api
         {
             try
             {
-                var results = _repository.GetAllTrips();
+                var results = _repository.GetTripsByUsername(User.Identity.Name);
 
                 return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
             }
@@ -45,6 +47,8 @@ namespace TheWorld.Controllers.Api
             if (ModelState.IsValid)
             {
                 var model = Mapper.Map<Trip>(newTrip);
+
+                model.UserName = User.Identity.Name;
 
                 _repository.AddTrip(model);
 

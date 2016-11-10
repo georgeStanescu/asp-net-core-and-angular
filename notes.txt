@@ -41,3 +41,15 @@ EF Core
   - building Data Access without the requirement on Relational Databases
   - work in progress
   - open source(design and implementation)
+
+ASP NET Identity = replacement for ASP NET Membership
+  - supports more types of authentication/authorization: Cookies, OAuth2, etc.
+  - pluggable:
+      - have complete control over User entities
+      - supports non-relational storage of identities
+      - supports LDAP/AD stores
+
+Securing WebAPI
+  - easiest and common is to use the same Cookie Auth(used for website authentication)
+  - better solutions: OAuth2, Open ID Connect
+  - cookies are subject to cross-site request forgery
