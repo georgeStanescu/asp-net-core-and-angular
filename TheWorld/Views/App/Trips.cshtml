@@ -7,6 +7,23 @@
     ViewBag.Title = "Home Page";
 }
 
+@section Scripts {
+        <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="~/ng-dependencies/core-js/client/shim.min.js"></script>
+    <script src="~/ng-dependencies/zone.js/dist/zone.js"></script>
+    <script src="~/ng-dependencies/reflect-metadata/Reflect.js"></script>
+    <script src="~/ng-dependencies/systemjs/dist/system.src.js"></script>
+        <!-- 2. Configure SystemJS -->
+    <script src="~/ng-sources/systemjs.config.js"></script>
+    <script>
+            System.import('../ng-sources/main').catch(function (err)
+            {
+                console.error(err);
+            });
+    </script>
+}
+
 <div class="row">
     <div class="col-md-6">
         <h1>The World</h1>
