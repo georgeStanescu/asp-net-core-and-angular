@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Trip } from './trip';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { ValidationService } from './validation.service';
+import { TripService } from './trip.service';
 import { ControlMessagesComponent } from './control-messages.component';
 
 @Component({
@@ -28,15 +29,21 @@ import { ControlMessagesComponent } from './control-messages.component';
         </form>
     `
 })
-export class TripsComponent {
-    trips: Trip[] = [ new Trip("US Trip", new Date()), new Trip("World Trip", new Date()) ];
+export class TripsComponent implements OnInit {
+    trips: Trip[] = [];
     tripName: string = "";
     newTripForm: any;
+    errorMessage: string;
 
-    constructor(private builder: FormBuilder) {   
+    constructor(private builder: FormBuilder, private tripService: TripService) {   
         this.newTripForm = new FormGroup({
         'nameControl': new FormControl('', [Validators.required, Validators.minLength(5), ValidationService.nameValidator ])
         }); 
+    }
+
+    ngOnInit(): void {
+        this.tripService.getTrips()
+            .subscribe(trips => this.trips = trips, error => this.errorMessage = <any>error);
     }
     
     onSubmit() { 

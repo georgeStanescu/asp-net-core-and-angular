@@ -1,4 +1,5 @@
 import { NgModule }      from '@angular/core';
+import { HttpModule }      from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule }   from '@angular/forms';
 
@@ -8,7 +9,7 @@ import { ControlMessagesComponent } from './control-messages.component';
 import { ValidationService } from './validation.service';
 
 @NgModule({
-  imports:      [ BrowserModule, ReactiveFormsModule ],
+  imports:      [ BrowserModule, ReactiveFormsModule, HttpModule ],
   declarations: [ AppComponent, TripsComponent, ControlMessagesComponent ],
   providers: [ ValidationService ],
   bootstrap:    [ AppComponent ]
