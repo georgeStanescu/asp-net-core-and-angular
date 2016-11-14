@@ -10,7 +10,7 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
-gulp.task("scriptsNStyles", () => {
+gulp.task("ngDependencies", () => {
     gulp.src([
             'core-js/client/**',
             'systemjs/dist/system.src.js',
@@ -43,4 +43,4 @@ gulp.task('watch.ts', ['ts'], function () {
     return gulp.watch('ng-app/*.ts', ['ts']);
 });
 
-gulp.task('default', ['scriptsNStyles', 'watch']);
+gulp.task('default', ['ngDependencies', 'watch']);
