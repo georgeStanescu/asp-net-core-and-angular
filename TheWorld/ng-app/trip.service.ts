@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Trip } from "./trip";
-import { Http, Response } from "@angular/http";
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -18,6 +18,16 @@ export class TripService {
     .map((response: Response) => <Trip[]> response.json())
     .do(data => console.log('All: ' + JSON.stringify(data)))
     .catch(this.handleErrors);
+  }
+
+  addTrip(newTrip: Trip) : Observable<Trip> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http
+      .post(this.tripsUrl, newTrip, options)
+      .map((response: Response) => <Trip> response.json())
+      .catch(this.handleErrors);
   }
 
   private handleErrors(error: Response) {

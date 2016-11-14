@@ -8,6 +8,11 @@ import { ControlMessagesComponent } from './control-messages.component';
 @Component({
     selector: 'tw-trips',
     template: `
+        <div class="text-danger" *ngIf='errorMessage'>{{ errorMessage }}</div>
+        <div class="text-center" *ngIf='isBusy'>
+            <i class="fa fa-spinner fa-spin"></i> Loading...
+        </div>
+
         <table class="table table-responsive table-striped" *ngIf='trips && trips.length'>
             <tr *ngFor='let trip of trips'>
                 <td>{{ trip.name }}</td>
@@ -34,6 +39,7 @@ export class TripsComponent implements OnInit {
     tripName: string = "";
     newTripForm: any;
     errorMessage: string;
+    isBusy: boolean = false;
 
     constructor(private builder: FormBuilder, private tripService: TripService) {   
         this.newTripForm = new FormGroup({
@@ -42,12 +48,17 @@ export class TripsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isBusy = true;
+
         this.tripService.getTrips()
-            .subscribe(trips => this.trips = trips, error => this.errorMessage = <any>error);
+            .subscribe(trips => this.trips = trips, error => this.errorMessage = <any>error, () => { this.isBusy = false; });
     }
     
     onSubmit() { 
-        this.trips.push(new Trip(this.tripName, new Date()));
+        var newTrip = new Trip(this.tripName, new Date());
+
+        this.tripService.addTrip(newTrip)
+            .subscribe(trip => this.trips.push(trip), error => this.errorMessage = <any>error);
 
         this.tripName = "";
     }
