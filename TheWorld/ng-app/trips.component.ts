@@ -24,12 +24,12 @@ import { ControlMessagesComponent } from './control-messages.component';
 
         <h1>Create trip</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="newTripForm">
-        <div class="form-group">
-            <label for="nameOfTrip">Name</label>
-            <input formControlName="nameControl" [(ngModel)]="tripName" id="nameOfTrip" />
-            <control-messages [control]="newTripForm.controls.nameControl"></control-messages>
-        </div>
-        <button type="submit" class="btn btn-default" [disabled]="!newTripForm.valid">Submit</button>
+            <div class="form-group">
+                <label for="nameOfTrip">Name</label>
+                <input formControlName="nameControl" [(ngModel)]="tripName" id="nameOfTrip" />
+                <control-messages [control]="newTripForm.controls.nameControl"></control-messages>
+            </div>
+            <button type="submit" class="btn btn-default" [disabled]="!newTripForm.valid">Submit</button>
         </form>
     `
 })

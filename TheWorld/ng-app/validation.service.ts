@@ -6,7 +6,8 @@ export class ValidationService {
             'invalidCreditCard': 'Is invalid credit card number',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
-            'minlength': `Minimum length ${validatorValue.requiredLength}`
+            'minlength': `Minimum length ${validatorValue.requiredLength}`,
+            'pattern': 'input is not in the correct format'
         };
 
         return config[validatorName];

@@ -39,6 +39,17 @@ export class TripService {
     .catch(this.handleErrors);
   }
 
+  addStop(tripName: string, newStop: Stop) : Observable<Stop> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let stopsUrl = "/api/trips/" + tripName + "/stops";
+
+    return this.http
+      .post(stopsUrl, newStop, options)
+      .map((response: Response) => <Stop> response.json())
+      .catch(this.handleErrors);
+  }
+
   private handleErrors(error: Response) {
     console.error(error);
     return Observable.throw(error.json().error || 'server error');

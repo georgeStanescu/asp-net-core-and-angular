@@ -15,6 +15,20 @@ import { Stop } from './stop';
         <h1>{{ tripName }}</h1>
         <div class="alert alert-danger" *ngIf='errorMessage'>{{errorMessage}}</div>
 
+        <form novalidate (ngSubmit)="onSubmit()" [formGroup]="newStopForm">
+            <div class="form-group">
+                <label for="nameOfStop">Location</label>
+                <input formControlName="nameControl" [(ngModel)]="stopName" id="nameOfStop" />
+                <control-messages [control]="newStopForm.controls.nameControl"></control-messages>
+            </div>
+            <div class="form-group">
+                <label for="arrival">Arrival</label>
+                <input formControlName="arrivalControl" [(ngModel)]="arrival" id="arrival" />
+                <control-messages [control]="newStopForm.controls.arrivalControl"></control-messages>
+            </div>
+            <button type="submit" class="btn btn-default" [disabled]="!newStopForm.valid">Add Stop</button>
+        </form>
+
         <table class="table table-responsive table-striped" *ngIf='stops && stops.length'>
           <tr>
             <th>Location</th>
@@ -26,20 +40,6 @@ import { Stop } from './stop';
             <td>{{ stop.arrival | date: shortDate }}</td>
           </tr>
         </table>
-
-        <div>
-            <div class="form-group">
-                <label>Date</label>
-                <input class="form-control" />
-            </div>
-            <div class="form-group">
-                <label>Location</label>
-                <input class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-success" />
-            </div>
-        </div>
       </div>
       <div class="col-md-6">
           <h1>The Map</h1>
@@ -50,10 +50,22 @@ import { Stop } from './stop';
 })
 export class TripEditorComponent implements OnInit {
   tripName : string = "";
+  stopName: string = "";
+  arrival: Date = null;
   errorMessage: string = "";
   stops: Stop[] = [];
+  newStopForm: any;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _tripService: TripService) {}
+  constructor(
+    private _builder: FormBuilder, 
+    private _route: ActivatedRoute, 
+    private _router: Router, 
+    private _tripService: TripService) {
+      this.newStopForm = new FormGroup({
+        'nameControl': new FormControl('', [Validators.required, Validators.minLength(3) ]),
+        'arrivalControl': new FormControl('', [Validators.required, Validators.pattern("[0-9]{2}/[0-9]{2}/[0-9]{4}") ])
+        }); 
+    }
 
   ngOnInit(): void {
      this._route.params.subscribe(params => {
@@ -84,4 +96,14 @@ export class TripEditorComponent implements OnInit {
           });
       }
   }
+
+  onSubmit() { 
+        var newStop = new Stop(this.stopName, this.arrival);
+
+        this._tripService.addStop(this.tripName, newStop)
+          .subscribe(stop => this.stops.push(stop), error => this.errorMessage = <any>error);
+
+        this.stopName = "";
+        this.arrival = null;
+    }
 }
