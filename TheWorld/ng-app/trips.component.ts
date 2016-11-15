@@ -6,7 +6,6 @@ import { TripService } from './trip.service';
 import { ControlMessagesComponent } from './control-messages.component';
 
 @Component({
-    selector: 'tw-trips',
     template: `
         <div class="text-danger" *ngIf='errorMessage'>{{ errorMessage }}</div>
         <div class="text-center" *ngIf='isBusy'>
@@ -32,7 +31,8 @@ import { ControlMessagesComponent } from './control-messages.component';
         </div>
         <button type="submit" class="btn btn-default" [disabled]="!newTripForm.valid">Submit</button>
         </form>
-    `
+    `,
+    providers: [ TripService ]
 })
 export class TripsComponent implements OnInit {
     trips: Trip[] = [];

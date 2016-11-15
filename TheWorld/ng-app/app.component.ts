@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { TripService } from './trip.service';
 
 @Component({
   selector: 'tw-app',
   template: `
-  <tw-trips></tw-trips>
-  `,
-  providers: [ TripService ]
+    <router-outlet></router-outlet>
+  `
 })
 export class AppComponent { }
