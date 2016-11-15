@@ -43,7 +43,7 @@ import { Stop } from './stop';
       </div>
       <div class="col-md-6">
           <h1>The Map</h1>
-
+          <div id="map"></div>
       </div>
     </div>
   `
@@ -61,6 +61,27 @@ export class TripEditorComponent implements OnInit {
     });
 
     this._tripService.getStops(this.tripName)
-            .subscribe(stops => this.stops = stops, error => this.errorMessage = <any>error, () => { });
+        .subscribe(stops => this.stops = stops, error => this.errorMessage = <any>error, () => {
+            this.showMap(this.stops);
+        });
+  }
+
+  showMap(stops): void {
+      if (stops && stops.length > 0) {
+          var mapStops = _.map(stops, function (stop) {
+              return {
+                  lat: stop.latitude,
+                  long: stop.longitude,
+                  info: stop.name
+              }
+          });
+
+          travelMap.createMap({
+              stops: mapStops,
+              selector: "#map",
+              currentStop: 1,
+              initialZoom: 3
+          });
+      }
   }
 }

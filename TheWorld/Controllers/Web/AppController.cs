@@ -46,6 +46,8 @@ namespace TheWorld.Controllers.Web
         {
             try
             {
+                ViewBag.GoogleMapsKey = _config["Keys:GoogleMapsKey"];
+
                 return View();
             }
             catch (Exception exp)
@@ -71,7 +73,7 @@ namespace TheWorld.Controllers.Web
 
             if (ModelState.IsValid)
             {
-                _mailService.SendMail(_config["MailSettigs:ToAddress"], viewModel.Email, "From TheWorld", viewModel.Message);
+                _mailService.SendMail(_config["MailSettings:ToAddress"], viewModel.Email, "From TheWorld", viewModel.Message);
 
                 ModelState.Clear();
 
