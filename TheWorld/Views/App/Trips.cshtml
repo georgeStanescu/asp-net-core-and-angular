@@ -1,11 +1,6 @@
 ﻿@{ 
     ViewBag.Title = "Home Page";
 }
-@model IEnumerable<TheWorld.Models.Trip>
-
-@{ 
-    ViewBag.Title = "Home Page";
-}
 
 @section Scripts {
         <!-- 1. Load libraries -->
@@ -26,30 +21,4 @@
 
 <div class="row">
     <tw-app>Loading...</tw-app>
-    <div class="col-md-6">
-        <h1>The World</h1>
-        <form>
-            <div class="form-group">
-                <label>Date</label>
-                <input class="form-control" />
-            </div>
-            <div class="form-group">
-                <label>Location</label>
-                <input class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-success" />
-            </div>
-        </form>
-    </div>
-    <div class="col-md-6">
-        <h1>The Map</h1>
-
-        <ul>
-            @foreach (var item in Model)
-            {
-                <li>@item.Name : @item.DateCreated.ToString("d")</li>
-            }
-        </ul>
-    </div>
 </div>

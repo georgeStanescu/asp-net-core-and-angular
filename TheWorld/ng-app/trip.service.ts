@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Trip } from "./trip";
+import { Stop } from "./stop";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -28,6 +29,14 @@ export class TripService {
       .post(this.tripsUrl, newTrip, options)
       .map((response: Response) => <Trip> response.json())
       .catch(this.handleErrors);
+  }
+
+  getStops(tripName: string){
+    var stopsUrl = "/api/trips/" + tripName + "/stops";
+
+    return this.http.get(stopsUrl)
+    .map((response: Response) => <Stop[]> response.json())
+    .catch(this.handleErrors);
   }
 
   private handleErrors(error: Response) {

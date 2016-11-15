@@ -17,7 +17,7 @@ import { ControlMessagesComponent } from './control-messages.component';
                 <td>{{ trip.name }}</td>
                 <td>{{ trip.dateCreated | date : 'dd.MM.yyyy' }}</td>
                 <td>
-                    <a href="#" class="btn btn-sm btn-primary">Manage</a>
+                    <a [routerLink]="['/tripEditor', trip.name]" class="btn btn-sm btn-primary">Manage</a>
                 </td>
             </tr>
         </table>
@@ -31,8 +31,7 @@ import { ControlMessagesComponent } from './control-messages.component';
         </div>
         <button type="submit" class="btn btn-default" [disabled]="!newTripForm.valid">Submit</button>
         </form>
-    `,
-    providers: [ TripService ]
+    `
 })
 export class TripsComponent implements OnInit {
     trips: Trip[] = [];
