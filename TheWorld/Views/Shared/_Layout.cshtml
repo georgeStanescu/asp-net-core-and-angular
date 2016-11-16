@@ -76,7 +76,13 @@
 
     @RenderSection("scripts", false)
 
-    <script type="text/javascript" src="~/js/app.js"></script>
+    <environment names="Development">
+        <script type="text/javascript" src="~/js/app.js"></script>
+    </environment>
+    <environment names="Production,Staging">
+        <script type="text/javascript" src="~/lib/_app/app.js"></script>
+    </environment> 
+    
 </body>
 
 </html>

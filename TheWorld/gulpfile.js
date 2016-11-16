@@ -1,6 +1,7 @@
 var ts = require('gulp-typescript');
 var gulp = require('gulp');
 var clean = require('gulp-clean');
+var uglify = require('gulp-uglify');
 
 var destPath = './wwwroot/ng-dependencies/';
 
@@ -35,6 +36,12 @@ gulp.task('ts', function (done) {
     ])
         .pipe(ts(tsProject), undefined, ts.reporter.fullReporter());
     return tsResult.js.pipe(gulp.dest('./wwwroot/ng-sources'));
+});
+
+gulp.task("minify", () => {
+    gulp.src(['wwwroot/ng-sources/*.js', 'wwwroot/js/*.js'])
+        .pipe(uglify())
+        .pipe(gulp.dest('wwwroot/lib/_app'));
 });
 
 gulp.task('watch', ['watch.ts']);
